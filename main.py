@@ -10,6 +10,7 @@ from sqlalchemy.orm import sessionmaker  # Factory for database sessions
 from dotenv import load_dotenv  # Loads .env file variables
 import os  # Access environment variables
 
+
 # -----------------------------------------------------------
 # Load environment variables from .env
 # -----------------------------------------------------------
