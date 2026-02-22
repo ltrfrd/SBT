@@ -9,7 +9,17 @@ from starlette.middleware.sessions import SessionMiddleware
 from app import models  # noqa: F401 - imported for metadata registration
 from app.config import settings
 from app.database import Base, SessionLocal, engine
-from app.routers import auth, dashboard, driver, payroll, route, run, school, stop, student
+from app.routers import (
+    auth,
+    dashboard,
+    driver,
+    payroll,
+    route,
+    run,
+    school,
+    stop,
+    student,
+)
 from app.utils.auth import get_current_driver
 from app.utils.seed import seed_default_driver
 from app.utils.ws_manager import ConnectionManager
