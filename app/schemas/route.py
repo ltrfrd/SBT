@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class StopNestedCreate(BaseModel):
@@ -23,7 +23,7 @@ class RunNestedCreate(BaseModel):
     status: str = "scheduled"
     started_at: datetime | None = None
     ended_at: datetime | None = None
-    stops: list[StopNestedCreate] = []
+    stops: list[StopNestedCreate] = Field(default_factory=list)
 
 
 class RunNestedOut(BaseModel):
@@ -36,7 +36,7 @@ class RunNestedOut(BaseModel):
     last_latitude: float | None = None
     last_longitude: float | None = None
     last_updated: datetime | None = None
-    stops: list[StopNestedOut] = []
+    stops: list[StopNestedOut] = Field(default_factory=list)
 
     model_config = ConfigDict(from_attributes=True)
 
@@ -52,8 +52,8 @@ class RouteBase(BaseModel):
 
 
 class RouteCreate(RouteBase):
-    school_ids: list[int] = []
-    runs: list[RunNestedCreate] = []
+    school_ids: list[int] = Field(default_factory=list)
+    runs: list[RunNestedCreate] = Field(default_factory=list)
 
 
 class RouteUpdate(BaseModel):
@@ -70,7 +70,7 @@ class RouteUpdate(BaseModel):
 class RouteOut(RouteBase):
     id: int
     created_at: datetime
-    school_ids: list[int] = []
-    runs: list[RunNestedOut] = []
+    school_ids: list[int] = Field(default_factory=list)
+    runs: list[RunNestedOut] = Field(default_factory=list)
 
     model_config = ConfigDict(from_attributes=True)

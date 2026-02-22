@@ -37,7 +37,7 @@ app.add_middleware(
 app.state.templates = Jinja2Templates(directory="app/templates")
 app.state.ws_manager = ConnectionManager()
 
-app.mount("/static", StaticFiles(directory="app/templates"), name="static")
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 app.include_router(auth.router)
 app.include_router(dashboard.router)

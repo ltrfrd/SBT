@@ -79,9 +79,12 @@ def create_route(payload: RouteCreate, db: Session = Depends(get_db)):
                 db.add(stop)
 
         db.commit()
-    except Exception:
+    except Exception as exc:
         db.rollback()
-        raise
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Failed to create route with nested runs/stops: {exc}",
+        ) from exc
 
     route = _load_route_with_nested(route.id, db)
     return _to_route_out(route)
