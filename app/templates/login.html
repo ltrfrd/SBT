@@ -1,0 +1,28 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center mt-5">
+  <div class="col-md-5">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h2 class="h4 mb-3">Driver Login</h2>
+        {% if error %}
+          <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        <form method="post" action="/login" class="d-grid gap-3">
+          <div>
+            <label class="form-label">Email</label>
+            <input name="email" type="email" class="form-control" required />
+          </div>
+          <div>
+            <label class="form-label">Password</label>
+            <input name="password" type="password" class="form-control" required />
+          </div>
+          <button class="btn btn-primary" type="submit">Login</button>
+        </form>
+        <hr>
+        <p class="small text-muted mb-0">Demo account: driver@sbt.local / driver123</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<h1 class="h3 mb-4">Operations Dashboard</h1>
+<div class="row g-3 mb-4">
+  <div class="col-md-3"><div class="card card-metric"><div class="card-body"><h6>Drivers</h6><p class="display-6 mb-0">{{ metrics.drivers }}</p></div></div></div>
+  <div class="col-md-3"><div class="card card-metric"><div class="card-body"><h6>Routes</h6><p class="display-6 mb-0">{{ metrics.routes }}</p></div></div></div>
+  <div class="col-md-3"><div class="card card-metric"><div class="card-body"><h6>Students</h6><p class="display-6 mb-0">{{ metrics.students }}</p></div></div></div>
+  <div class="col-md-3"><div class="card card-metric"><div class="card-body"><h6>Active Runs</h6><p class="display-6 mb-0">{{ metrics.active_runs }}</p></div></div></div>
+</div>
+
+<div class="row g-4">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header">Top Routes by Student Load</div>
+      <ul class="list-group list-group-flush">
+        {% for route_name, student_count in route_load %}
+          <li class="list-group-item d-flex justify-content-between">
+            <span>{{ route_name }}</span><strong>{{ student_count }}</strong>
+          </li>
+        {% else %}
+          <li class="list-group-item text-muted">No data</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header">Recent Runs</div>
+      <ul class="list-group list-group-flush">
+        {% for run in recent_runs %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>Run #{{ run.id }} - {{ run.status }}</span>
+            <a class="btn btn-sm btn-outline-primary" href="/runs/{{ run.id }}/driver">Open</a>
+          </li>
+        {% else %}
+          <li class="list-group-item text-muted">No runs yet</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
